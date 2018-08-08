@@ -42,7 +42,9 @@ pipeline {
                 branch 'master'
             }
             steps {
-                input 'Deploy to Production?'
+                timeout(time:2, unit:'MINUTES') {
+                    input 'Deploy to Production?'
+                }
                 milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'kube_int_cluster',
